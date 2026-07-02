@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ten Tego</title>
+    <link rel="stylesheet" href="./styles.css?v=title1" />
+  </head>
+  <body class="is-title">
+    <section class="title-screen" aria-label="Ekran tytułowy">
+      <button class="title-enter" id="title-enter" type="button" aria-label="Przejdź do ustawień gry">
+        <img class="title-art" src="./title-screen.png" alt="Ten Tego" />
+        <span class="title-start-badge">Start</span>
+      </button>
+    </section>
+
+    <section class="settings-screen" aria-label="Ustawienia gry">
+      <div class="settings-card">
+        <div class="settings-hero">
+          <div class="settings-burst settings-burst-left" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong data-mark="?">?</strong>
+            <strong data-mark="!">!</strong>
+          </div>
+          <img class="settings-logo" src="./logo-ten-tego-cutout.png" alt="Ten Tego" />
+          <div class="settings-burst settings-burst-right" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <strong data-mark="?">?</strong>
+            <strong data-mark="!">!</strong>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <section class="settings-panel settings-mode">
+            <span class="settings-kicker">Tryb gry</span>
+            <div class="setup-choice" data-setting="mode">
+              <button class="setup-button is-selected" data-value="1v1" type="button">1v1</button>
+              <button class="setup-button" data-value="2v2" type="button">2v2</button>
+            </div>
+          </section>
+
+          <section class="settings-panel settings-deck">
+            <span class="settings-kicker">Talia kart</span>
+            <div class="setup-choice setup-choice-decks" data-setting="deck">
+              <button class="setup-button is-selected" data-value="classic" type="button">
+                Znane osoby
+                <small>świat i Polska</small>
+              </button>
+              <button class="setup-button" data-value="cartoons" type="button">
+                Bajki
+                <small>klasyczne</small>
+              </button>
+              <button class="setup-button" data-value="movies" type="button">
+                Filmy
+                <small>postacie</small>
+              </button>
+              <button class="setup-button" data-value="objects" type="button">
+                Przedmioty
+                <small>rzeczy</small>
+              </button>
+              <button class="setup-button" data-value="mix" type="button">
+                Mix
+                <small>wszystko</small>
+              </button>
+            </div>
+          </section>
+
+          <section class="settings-panel settings-rounds">
+            <span class="settings-kicker">Rundy</span>
+            <div class="setup-choice" data-setting="rounds">
+              <button class="setup-button" data-value="8" type="button">8</button>
+              <button class="setup-button is-selected" data-value="12" type="button">12</button>
+              <button class="setup-button" data-value="16" type="button">16</button>
+            </div>
+          </section>
+
+          <section class="settings-panel settings-time">
+            <span class="settings-kicker">Czas na turę</span>
+            <div class="setup-choice" data-setting="time">
+              <button class="setup-button" data-value="45" type="button">45 s</button>
+              <button class="setup-button is-selected" data-value="60" type="button">60 s</button>
+              <button class="setup-button" data-value="90" type="button">90 s</button>
+            </div>
+          </section>
+        </div>
+
+        <button class="start-game-button" id="start-game" type="button">Start gry</button>
+      </div>
+    </section>
+
+    <main class="app-shell" aria-label="Ten Tego">
+      <section class="hud" aria-label="Panel gry">
+        <div class="mode-switch" aria-label="Tryb gry">
+          <button class="mode-button is-active" data-mode="1v1" type="button">1v1</button>
+          <button class="mode-button" data-mode="2v2" type="button">2v2</button>
+        </div>
+
+        <section class="scoreboard" aria-label="Wynik">
+          <article class="score score-yellow">
+            <span>Niebiescy</span>
+            <strong id="score-yellow">0</strong>
+          </article>
+          <article class="round-pill">
+            <span class="round-label">Runda</span>
+            <strong class="round-counter"><span id="round-number">1</span><span class="round-total">/12</span></strong>
+            <div class="mini-dots" id="round-dots" aria-hidden="true"></div>
+          </article>
+          <article class="score score-red">
+            <span>Różowi</span>
+            <strong id="score-red">0</strong>
+          </article>
+        </section>
+
+        <section class="timer-panel" aria-label="Czas">
+          <div class="timer-ring" id="timer-ring" style="--progress: 100">
+            <div class="timer-inner">
+              <strong id="timer-value">60</strong>
+              <span>sek.</span>
+            </div>
+          </div>
+          <div class="timer-controls">
+            <button id="start-pause" type="button">Start</button>
+            <button id="add-time" type="button">+15</button>
+          </div>
+        </section>
+
+        <section class="turn-card" id="turn-card" aria-label="Tura">
+          <span>Tura</span>
+          <strong id="turn-title">Niebiescy</strong>
+          <small id="turn-subtitle"></small>
+        </section>
+
+        <div class="hud-actions">
+          <button class="hud-button" id="new-round" type="button">Kolejna tura</button>
+          <button class="hud-button" id="reset-game" type="button">Reset</button>
+        </div>
+      </section>
+
+      <section class="game-skin" aria-label="Plansza">
+        <article class="person-card" aria-live="polite">
+          <h1 id="person-name">Albert Einstein</h1>
+          <div class="forbidden-list" id="forbidden-list"></div>
+        </article>
+
+        <section class="action-row" aria-label="Akcje">
+          <button class="answer-button correct" id="correct" type="button" aria-label="Poprawnie, plus jeden punkt"></button>
+          <button class="answer-button skip" id="skip" type="button" aria-label="Pomiń bez punktu"></button>
+          <button class="answer-button foul" id="foul" type="button" aria-label="Zakazane słowo, koniec tury"></button>
+          <button class="answer-button next" id="next-card" type="button" aria-label="Następna karta"></button>
+        </section>
+      </section>
+
+      <section class="helper-dock" aria-label="Ustawienia i pomoc">
+        <details class="rules-box">
+          <summary>Zasady</summary>
+          <ol>
+            <li><strong>Wylosuj kartę.</strong> Na karcie jest znana osoba i 6 zakazanych skojarzeń.</li>
+            <li><strong>Opowiadaj.</strong> Dawaj podpowiedzi bez używania zakazanych słów, ich odmian i oczywistych tłumaczeń.</li>
+            <li><strong>Punktuj.</strong> Poprawna odpowiedź daje 1 punkt. Zakazane słowo kończy turę.</li>
+            <li><strong>Wygraj.</strong> Po 12 rundach wygrywa drużyna z wyższym wynikiem.</li>
+          </ol>
+        </details>
+
+        <details class="players-box">
+          <summary>Gracze</summary>
+          <div class="player-grid">
+            <label>Niebieski opisuje<input id="yellow-speaker" value="Michał" /></label>
+            <label>Niebieski zgaduje<input id="yellow-guesser" value="Anna" /></label>
+            <label>Różowy opisuje<input id="red-speaker" value="Tomek" /></label>
+            <label>Różowy zgaduje<input id="red-guesser" value="Kasia" /></label>
+          </div>
+        </details>
+
+        <details class="log-box">
+          <summary>Historia</summary>
+          <ul id="event-log"></ul>
+        </details>
+      </section>
+    </main>
+
+    <script src="./app.js?v=title1"></script>
+  </body>
+</html>

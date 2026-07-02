@@ -10,6 +10,8 @@ Tabletowa gra imprezowa w stylu zakazanych skojarzeń.
 - `title-screen.png` - ekran tytułowy
 - `game-skin.png` - plansza gry
 - `logo-ten-tego-cutout.png` - logo użyte na stronie ustawień
+- `manifest.webmanifest` - konfiguracja PWA
+- `icons/` - ikony PWA, Apple Touch Icon i favicon
 
 ## Uruchomienie lokalnie
 
@@ -41,3 +43,14 @@ Po chwili GitHub pokaże link do działającej strony.
 ## Notatka
 
 Gra jest statyczna. Nie wymaga backendu, bazy danych ani instalowania zależności.
+
+## Ikona PWA
+
+Ikony są podpięte w `index.html` i `manifest.webmanifest`.
+Najważniejsze pliki:
+
+- `icons/icon-192.png`
+- `icons/icon-512.png`
+- `icons/maskable-icon-192.png`
+- `icons/maskable-icon-512.png`
+- `icons/apple-touch-icon.png`

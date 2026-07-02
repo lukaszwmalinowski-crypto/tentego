@@ -246,6 +246,615 @@ const forbiddenOverrides = {
   "Czkawka": ["smok", "Szczerbatek", "wiking", "latanie", "Astrid", "Berk"],
 };
 
+const knownPersonForbiddenOverrides = {
+  "Albert Einstein": ["E=mc2", "teoria względności", "fizyka", "geniusz", "włosy", "Nobel"],
+  "Taylor Swift": ["Eras Tour", "Swifties", "Shake It Off", "Love Story", "ex", "country"],
+  "Cristiano Ronaldo": ["CR7", "Siu", "Portugalia", "Real Madryt", "Manchester", "bramki"],
+  "Lionel Messi": ["Argentyna", "Barcelona", "Inter Miami", "Mundial", "lewa noga", "Ronaldo"],
+  "Beyonce": ["Single Ladies", "Jay-Z", "Destiny's Child", "Queen B", "Renaissance", "taniec"],
+  "Elon Musk": ["Tesla", "SpaceX", "rakieta", "Mars", "X", "miliarder"],
+  "Oprah Winfrey": ["talk-show", "kanapa", "prezenty", "wywiady", "telewizja", "książki"],
+  "Michael Jackson": ["Thriller", "moonwalk", "rękawiczka", "Billie Jean", "Neverland", "król popu"],
+  "Madonna": ["Like a Virgin", "Material Girl", "Vogue", "królowa popu", "stożkowy biustonosz", "koncerty"],
+  "Adele": ["Hello", "Someone Like You", "ballady", "głos", "Londyn", "płyta 25"],
+  "Lady Gaga": ["Poker Face", "Shallow", "Born This Way", "mięsna sukienka", "Oscary", "Little Monsters"],
+  "Harry Styles": ["One Direction", "As It Was", "Watermelon Sugar", "garnitury", "Dunkierka", "loczki"],
+  "Billie Eilish": ["Bad Guy", "Finneas", "szept", "zielone włosy", "Grammy", "Ocean Eyes"],
+  "Rihanna": ["Umbrella", "Fenty", "Barbados", "Work", "Super Bowl", "kosmetyki"],
+  "Shakira": ["Waka Waka", "biodra", "Kolumbia", "Pique", "Hips Don't Lie", "wilczyca"],
+  "Dwayne Johnson": ["The Rock", "wrestling", "łysy", "mięśnie", "Jumanji", "Fast & Furious"],
+  "Tom Cruise": ["Top Gun", "Mission Impossible", "Ethan Hunt", "samolot", "kaskader", "Scientologia"],
+  "Leonardo DiCaprio": ["Titanic", "Oscar", "Wilk z Wall Street", "Incepcja", "ekologia", "Jack Dawson"],
+  "Brad Pitt": ["Fight Club", "Angelina", "Troy", "Once Upon a Time", "przystojny", "Benjamin Button"],
+  "Angelina Jolie": ["Tomb Raider", "Maleficent", "Brad Pitt", "usta", "ONZ", "adopcje"],
+  "Meryl Streep": ["Diabeł ubiera się u Prady", "Mamma Mia", "Oscary", "Miranda Priestly", "Żelazna Dama", "Sophie"],
+  "Will Smith": ["Men in Black", "Fresh Prince", "Oscarowy policzek", "rap", "Jada", "Ali"],
+  "Jackie Chan": ["kung-fu", "Rush Hour", "kaskader", "Hongkong", "walka", "komedia akcji"],
+  "Keanu Reeves": ["Matrix", "Neo", "John Wick", "motocykl", "łagodny", "czarny garnitur"],
+  "Johnny Depp": ["Jack Sparrow", "Edward Nożycoręki", "kapelusz", "pirat", "Tim Burton", "Amber Heard"],
+  "Marilyn Monroe": ["biała sukienka", "blondynka", "Kennedy", "Some Like It Hot", "ikona", "uśmiech"],
+  "Charlie Chaplin": ["wąsik", "laska", "kino nieme", "włóczęga", "melonik", "komik"],
+  "Walt Disney": ["Myszka Miki", "Disneyland", "animacja", "zamek", "studio", "Kaczor Donald"],
+  "Steven Spielberg": ["Jurassic Park", "E.T.", "Indiana Jones", "Szczęki", "Lista Schindlera", "Oscar"],
+  "Quentin Tarantino": ["Pulp Fiction", "Kill Bill", "dialogi", "krew", "stopy", "Uma Thurman"],
+  "J.K. Rowling": ["Harry Potter", "Hogwart", "różdżka", "autorka", "czarodziej", "peron 9 i 3/4"],
+  "Stephen King": ["horror", "To", "klaun", "Carrie", "Lśnienie", "Maine"],
+  "William Shakespeare": ["Hamlet", "Romeo", "Julia", "teatr", "dramat", "Stratford"],
+  "Agatha Christie": ["Poirot", "Marple", "kryminał", "morderstwo", "Orient Express", "pisarka"],
+  "Pablo Picasso": ["kubizm", "Guernica", "Hiszpania", "malarz", "byk", "niebieski okres"],
+  "Vincent van Gogh": ["słoneczniki", "ucho", "Gwiaździsta noc", "Holandia", "malarz", "Arles"],
+  "Frida Kahlo": ["brwi", "Meksyk", "autoportret", "Diego Rivera", "kwiaty", "ból"],
+  "Leonardo da Vinci": ["Mona Lisa", "Ostatnia Wieczerza", "renesans", "wynalazca", "Włochy", "notatniki"],
+  "Maria Skłodowska-Curie": ["rad", "polon", "Nobel", "promieniotwórczość", "chemia", "Sorbonna"],
+  "Nikola Tesla": ["prąd przemienny", "cewka", "Edison", "błyskawice", "wynalazca", "Serbia"],
+  "Isaac Newton": ["jabłko", "grawitacja", "fizyka", "ruch", "Anglia", "pryzmat"],
+  "Charles Darwin": ["ewolucja", "dobór naturalny", "Galapagos", "gatunki", "Beagle", "biologia"],
+  "Steve Jobs": ["Apple", "iPhone", "czarny golf", "Mac", "prezentacja", "Pixar"],
+  "Bill Gates": ["Microsoft", "Windows", "komputer", "fundacja", "miliarder", "programista"],
+  "Mark Zuckerberg": ["Facebook", "Meta", "Harvard", "hoodie", "social media", "Instagram"],
+  "Jeff Bezos": ["Amazon", "Blue Origin", "łysy", "rakieta", "sklep online", "miliarder"],
+  "Barack Obama": ["Yes We Can", "Michelle", "Biały Dom", "prezydent USA", "Demokrata", "Nobel"],
+  "Donald Trump": ["Make America Great Again", "wieżowiec", "Republikanin", "Biały Dom", "włosy", "The Apprentice"],
+  "Nelson Mandela": ["RPA", "apartheid", "więzienie", "Robben Island", "Nobel", "prezydent"],
+  "Mahatma Gandhi": ["Indie", "bez przemocy", "sól", "okulary", "niepodległość", "marsz"],
+  "Robert Lewandowski": ["Barcelona", "Bayern", "gol", "napastnik", "Polska", "Anna"],
+  "Iga Świątek": ["tenis", "Roland Garros", "rakieta", "kort", "liderka", "Raszyn"],
+  "Adam Małysz": ["skoki", "Wisła", "bułka z bananem", "wąsy", "orzeł", "narty"],
+  "Kamil Stoch": ["skoki", "Zakopane", "olimpiada", "złoto", "narty", "Planica"],
+  "Mariusz Pudzianowski": ["Pudzian", "strongman", "MMA", "siła", "ciężary", "Dominator"],
+  "Andrzej Gołota": ["boks", "Riddick Bowe", "dyskwalifikacja", "ring", "waga ciężka", "ciosy poniżej pasa"],
+  "Agnieszka Radwańska": ["Isia", "tenis", "Kraków", "Wimbledon", "rakieta", "kort"],
+  "Justyna Kowalczyk": ["biegi narciarskie", "Tour de Ski", "Vancouver", "narty", "medal", "Kasina"],
+  "Krzysztof Krawczyk": ["Parostatek", "Trubadurzy", "wąsy", "głos", "Chciałem być", "Ostatni raz"],
+  "Maryla Rodowicz": ["Małgośka", "Opole", "kolorowe stroje", "futro", "festiwal", "Niech żyje bal"],
+  "Doda": ["Virgin", "róż", "skandal", "Rabczewska", "Nie daj się", "show"],
+  "Sanah": ["Szampan", "Uczta", "skrzypce", "poezja", "Ale jazz", "królowa dram"],
+  "Dawid Podsiadło": ["Małomiasteczkowy", "X Factor", "Dąbrowa Górnicza", "stadion", "Trójkąty", "Nie ma fal"],
+  "Mata": ["Patointeligencja", "Michał Matczak", "SBM", "rap", "Schodki", "Warszawa"],
+  "Quebonafide": ["Egzotyka", "tatuaże", "Ciechanów", "Kuba Grabowski", "Taco", "rap"],
+  "Taco Hemingway": ["Warszawa", "Marmur", "Fifi", "rap", "Dawid Podsiadło", "Pocztówka"],
+  "Michał Wiśniewski": ["Ich Troje", "czerwone włosy", "A wszystko to", "żony", "show", "Keine Grenzen"],
+  "Czesław Niemen": ["Dziwny jest ten świat", "Sen o Warszawie", "wokal", "organy", "legenda", "Niemen"],
+  "Fryderyk Chopin": ["fortepian", "Żelazowa Wola", "Polonez", "nokturn", "Paryż", "kompozytor"],
+  "Olga Tokarczuk": ["Nobel", "Bieguni", "Prawiek", "pisarka", "literatura", "Wrocław"],
+  "Wisława Szymborska": ["Nobel", "poezja", "Kraków", "wiersze", "kot", "Nic dwa razy"],
+  "Henryk Sienkiewicz": ["Quo Vadis", "Trylogia", "Nobel", "Staś i Nel", "Ogniem i mieczem", "pisarz"],
+  "Andrzej Sapkowski": ["Wiedźmin", "Geralt", "Yennefer", "fantasy", "potwory", "Łódź"],
+  "Jan Paweł II": ["papież", "Wadowice", "Karol Wojtyła", "Watykan", "kremówki", "pielgrzymki"],
+  "Lech Wałęsa": ["Solidarność", "wąsy", "stocznia", "Nobel", "Gdańsk", "prezydent"],
+  "Mikołaj Kopernik": ["Toruń", "heliocentryzm", "Słońce", "Ziemia", "astronom", "pierniki"],
+  "Józef Piłsudski": ["marszałek", "legiony", "niepodległość", "kasztanka", "wąsy", "Belweder"],
+  "Jerzy Owsiak": ["WOŚP", "serduszko", "siema", "finał", "Pol'and'Rock", "puszka"],
+  "Kuba Wojewódzki": ["TVN", "kanapa", "talk-show", "samochody", "showman", "wywiady"],
+  "Robert Makłowicz": ["kuchnia", "podróże", "Kraków", "smak", "telewizja", "bałkańskie jedzenie"],
+  "Magda Gessler": ["Kuchenne rewolucje", "restauracja", "włosy", "rzucanie talerzami", "TVN", "smak"],
+  "Tomasz Karolak": ["Rodzinka.pl", "Ludwik", "teatr IMKA", "39 i pół", "komedia", "Warszawa"],
+  "Cezary Pazura": ["Kiler", "Psy", "głos Sida", "13 posterunek", "YouTube", "komedia"],
+  "Bogusław Linda": ["Psy", "Franz Maurer", "twardziel", "co ty wiesz", "kino", "głos"],
+  "Krystyna Janda": ["Człowiek z marmuru", "teatr Polonia", "Przesłuchanie", "Warszawa", "Wajda", "Man of Marble"],
+  "Ariana Grande": ["Thank U Next", "7 Rings", "kucyk", "Nickelodeon", "wysoki głos", "Positions"],
+  "Ed Sheeran": ["Shape of You", "Perfect", "rude włosy", "gitara", "loop pedal", "Thinking Out Loud"],
+  "Bruno Mars": ["Uptown Funk", "24K Magic", "Locked Out of Heaven", "kapelusz", "funk", "The Lazy Song"],
+  "Justin Bieber": ["Baby", "Hailey", "Beliebers", "Kanada", "Sorry", "YouTube"],
+  "Katy Perry": ["Firework", "Roar", "California Gurls", "shark", "kolorowe peruki", "Orlando Bloom"],
+  "Dua Lipa": ["Levitating", "New Rules", "Dance The Night", "Kosowo", "Future Nostalgia", "disco"],
+  "Miley Cyrus": ["Wrecking Ball", "Hannah Montana", "Flowers", "twerk", "Disney", "język"],
+  "Selena Gomez": ["Wizards of Waverly Place", "Rare", "Justin Bieber", "Only Murders", "Instagram", "Come & Get It"],
+  "Drake": ["Hotline Bling", "Kanada", "OVO", "Degrassi", "Certified Lover Boy", "rap"],
+  "Eminem": ["Slim Shady", "Lose Yourself", "Detroit", "8 Mile", "blond włosy", "rap battle"],
+  "Snoop Dogg": ["Doggystyle", "warkoczyki", "marihuana", "California", "Gin and Juice", "rap"],
+  "Tupac Shakur": ["2Pac", "California Love", "bandana", "Death Row", "All Eyez on Me", "rap legenda"],
+  "Freddie Mercury": ["Queen", "Bohemian Rhapsody", "wąsy", "Live Aid", "We Are the Champions", "Zanzibar"],
+  "Elvis Presley": ["rock and roll", "Graceland", "biodra", "Love Me Tender", "król", "biały kombinezon"],
+  "Bob Marley": ["reggae", "Jamajka", "One Love", "dredy", "No Woman No Cry", "rastafari"],
+  "John Lennon": ["Beatles", "Imagine", "Yoko Ono", "okulary", "Liverpool", "pokój"],
+  "Paul McCartney": ["Beatles", "Yesterday", "bas", "Hey Jude", "Liverpool", "Wings"],
+  "Mick Jagger": ["Rolling Stones", "usta", "Moves Like Jagger", "Jumpin Jack Flash", "rock", "taniec"],
+  "David Bowie": ["Ziggy Stardust", "Heroes", "różne oczy", "Space Oddity", "glam rock", "Berlin"],
+  "Whitney Houston": ["I Will Always Love You", "Bodyguard", "głos", "Dolly Parton", "Houston", "ballada"],
+  "Celine Dion": ["Titanic", "My Heart Will Go On", "Kanada", "Las Vegas", "ballada", "francuski akcent"],
+  "Tina Turner": ["Simply the Best", "Private Dancer", "nogi", "rock", "Ike Turner", "peruka"],
+  Cher: ["Believe", "Auto-Tune", "Moonstruck", "czarne włosy", "If I Could Turn Back Time", "ikona"],
+  Sting: ["The Police", "Englishman in New York", "Roxanne", "bas", "Fields of Gold", "joga"],
+  "Phil Collins": ["In the Air Tonight", "Genesis", "perkusja", "Tarzan", "łysy", "Another Day in Paradise"],
+  "George Michael": ["Careless Whisper", "Wham!", "Faith", "Last Christmas", "Freedom", "okulary"],
+  Prince: ["Purple Rain", "fiolet", "gitara", "symbol", "Kiss", "Minneapolis"],
+  "Lenny Kravitz": ["Are You Gonna Go My Way", "gitara", "dredy", "rock", "skóra", "Fly Away"],
+  "Kanye West": ["Yeezy", "Kim Kardashian", "Jesus Walks", "Graduation", "rap", "kontrowersje"],
+  "Jay-Z": ["Beyonce", "99 Problems", "Brooklyn", "Roc-A-Fella", "rap", "miliarder"],
+  "Kendrick Lamar": ["HUMBLE", "Compton", "Pulitzer", "To Pimp a Butterfly", "rap", "DNA"],
+  "Travis Scott": ["Astroworld", "Sicko Mode", "Kylie Jenner", "Houston", "auto-tune", "Cactus Jack"],
+  "Bad Bunny": ["Puerto Rico", "reggaeton", "Un Verano Sin Ti", "okulary", "latino", "Coachella"],
+  Rosalia: ["Motomami", "Hiszpania", "flamenco", "Malamente", "Con Altura", "czerwony strój"],
+  "Alicia Keys": ["No One", "Fallin", "fortepian", "Nowy Jork", "Girl on Fire", "głos"],
+  "Stevie Wonder": ["niewidomy", "Superstition", "harmonijka", "Signed Sealed Delivered", "Motown", "klawisze"],
+  "Aretha Franklin": ["Respect", "soul", "królowa", "Think", "gospel", "Detroit"],
+  "Ray Charles": ["Georgia on My Mind", "niewidomy", "pianino", "soul", "okulary", "Hit the Road Jack"],
+  "Frank Sinatra": ["My Way", "New York New York", "kapelusz", "Rat Pack", "crooner", "Las Vegas"],
+  "Bruce Springsteen": ["Born in the USA", "The Boss", "bandana", "gitara", "New Jersey", "Dancing in the Dark"],
+  Bono: ["U2", "okulary", "One", "Irlandia", "With or Without You", "aktywizm"],
+  "Ozzy Osbourne": ["Black Sabbath", "nietoperz", "mrok", "Crazy Train", "Sharon", "Prince of Darkness"],
+  Slash: ["Guns N' Roses", "cylinder", "gitara", "Sweet Child O' Mine", "loki", "solo"],
+  "Dave Grohl": ["Foo Fighters", "Nirvana", "perkusja", "gitara", "Everlong", "broda"],
+  "Kurt Cobain": ["Nirvana", "Smells Like Teen Spirit", "grunge", "Seattle", "Courtney Love", "gitara"],
+  "Axl Rose": ["Guns N' Roses", "Sweet Child O' Mine", "bandana", "wokal", "Welcome to the Jungle", "loki"],
+  "Chester Bennington": ["Linkin Park", "In the End", "Numb", "tatuaże", "wokal", "Hybrid Theory"],
+  "Anthony Hopkins": ["Hannibal Lecter", "Milczenie owiec", "Oscar", "Westworld", "maski", "walijski"],
+  "Morgan Freeman": ["głos narratora", "Skazani na Shawshank", "Seven", "Bóg", "Driving Miss Daisy", "spokój"],
+  "Robert De Niro": ["Taksówkarz", "Ojciec chrzestny II", "You talkin to me", "Kasyno", "Scorsese", "Raging Bull"],
+  "Al Pacino": ["Ojciec chrzestny", "Scarface", "Michael Corleone", "Say hello", "Zapach kobiety", "krzyk"],
+  "Joaquin Phoenix": ["Joker", "Gladiator", "Her", "Oscar", "Kommodus", "uśmiech"],
+  "Heath Ledger": ["Joker", "Mroczny Rycerz", "Why so serious", "Oscar", "Brokeback Mountain", "makijaż"],
+  "Christian Bale": ["Batman", "American Psycho", "machinista", "Gotham", "Mroczny Rycerz", "metamorfozy"],
+  "Harrison Ford": ["Indiana Jones", "Han Solo", "bicz", "Sokół Millennium", "Blade Runner", "uciekinier"],
+  "Samuel L. Jackson": ["Pulp Fiction", "Mace Windu", "Nick Fury", "fioletowy miecz", "Marvel", "motherfucker"],
+  "Denzel Washington": ["Training Day", "Malcolm X", "Equalizer", "Oscar", "Glory", "charyzma"],
+  "Matt Damon": ["Bourne", "Marsjanin", "Good Will Hunting", "Boston", "Ben Affleck", "ziemniaki"],
+  "Ben Affleck": ["Batman", "Argo", "Good Will Hunting", "Jennifer Lopez", "Boston", "Dunkin"],
+  "George Clooney": ["Ocean's Eleven", "ER", "Nespresso", "Batman i Robin", "srebro we włosach", "Amal"],
+  "Ryan Reynolds": ["Deadpool", "czerwony kostium", "Blake Lively", "Mint Mobile", "sarkazm", "Kanada"],
+  "Ryan Gosling": ["Barbie", "La La Land", "Drive", "Ken", "pianino", "Kanada"],
+  "Hugh Jackman": ["Wolverine", "pazury", "Logan", "musical", "Australia", "The Greatest Showman"],
+  "Chris Hemsworth": ["Thor", "młot", "Asgard", "Australia", "Avengers", "mięśnie"],
+  "Chris Evans": ["Kapitan Ameryka", "tarcza", "Avengers", "Steve Rogers", "Knives Out", "Boston"],
+  "Robert Downey Jr.": ["Iron Man", "Tony Stark", "Avengers", "reaktor", "Sherlock Holmes", "Marvel"],
+  "Scarlett Johansson": ["Czarna Wdowa", "Avengers", "Lucy", "Lost in Translation", "głos Her", "Marvel"],
+  "Jennifer Lawrence": ["Katniss", "Igrzyska śmierci", "Oscar", "Silver Linings", "łuk", "X-Men"],
+  "Emma Stone": ["La La Land", "Cruella", "Oscar", "rude włosy", "Easy A", "Poor Things"],
+  "Natalie Portman": ["Czarny łabędź", "Padme", "Thor", "Oscar", "balet", "V jak Vendetta"],
+  "Julia Roberts": ["Pretty Woman", "uśmiech", "Erin Brockovich", "Notting Hill", "Oscar", "rude włosy"],
+  "Sandra Bullock": ["Speed", "Grawitacja", "Miss Agent", "Oscar", "Bird Box", "Keanu Reeves"],
+  "Nicole Kidman": ["Moulin Rouge", "Australia", "The Hours", "Tom Cruise", "rude włosy", "Oscar"],
+  "Cate Blanchett": ["Galadriela", "Blue Jasmine", "Elizabeth", "Oscar", "Władca Pierścieni", "Australia"],
+  "Kate Winslet": ["Titanic", "Rose", "Avatar", "Oscar", "Mare of Easttown", "Jack Dawson"],
+  "Gal Gadot": ["Wonder Woman", "Izrael", "lasso", "szybcy i wściekli", "Diana", "tarcza"],
+  Zendaya: ["Euphoria", "Spider-Man", "MJ", "Diuna", "Rue", "czerwony dywan"],
+  "Millie Bobby Brown": ["Stranger Things", "Eleven", "gofry", "Enola Holmes", "łysa głowa", "Netflix"],
+  "Timothee Chalamet": ["Diuna", "Wonka", "Paul Atryda", "Call Me by Your Name", "Lok", "młody aktor"],
+  "Daniel Radcliffe": ["Harry Potter", "blizna", "okulary", "różdżka", "Hogwart", "Equus"],
+  "Emma Watson": ["Hermiona", "Harry Potter", "różdżka", "Belle", "ONZ", "mądra"],
+  "Rupert Grint": ["Ron Weasley", "Harry Potter", "rude włosy", "szachy", "Hogwart", "lody"],
+  "Benedict Cumberbatch": ["Sherlock", "Doctor Strange", "peleryna", "głos Smauga", "Marvel", "Londyn"],
+  "Henry Cavill": ["Superman", "Wiedźmin", "Geralt", "Man of Steel", "muskuły", "pies Kal"],
+  "Jason Momoa": ["Aquaman", "Khal Drogo", "włosy", "trójząb", "Hawaje", "Game of Thrones"],
+  "Margot Robbie": ["Barbie", "Harley Quinn", "Wilk z Wall Street", "Australia", "różowy", "łyżwy"],
+  "Anne Hathaway": ["Diabeł ubiera się u Prady", "Les Miserables", "Catwoman", "Oscar", "Pamiętnik księżniczki", "Mia"],
+  "Gwyneth Paltrow": ["Pepper Potts", "Goop", "Iron Man", "Oscar", "świeca", "Shakespeare in Love"],
+  "Saoirse Ronan": ["Lady Bird", "Brooklyn", "Małe kobietki", "Irlandia", "Oscar nominacje", "niebieskie oczy"],
+  "Greta Thunberg": ["klimat", "How dare you", "Szwecja", "protest szkolny", "ekologia", "aktywistka"],
+  "Malala Yousafzai": ["Pakistan", "edukacja", "Nobel", "dziewczynki", "Talibowie", "aktywistka"],
+  "Usain Bolt": ["100 metrów", "Jamajka", "błyskawica", "rekord świata", "sprint", "poza łucznika"],
+  "Michael Jordan": ["Chicago Bulls", "Air Jordan", "23", "NBA", "koszykówka", "Space Jam"],
+  "LeBron James": ["Lakers", "Cleveland", "King James", "NBA", "koszykówka", "Space Jam 2"],
+  "Kobe Bryant": ["Lakers", "Black Mamba", "24", "81 punktów", "NBA", "koszykówka"],
+  "Serena Williams": ["tenis", "Wimbledon", "siostra Venus", "serwis", "rakieta", "Grand Slam"],
+  "Roger Federer": ["Szwajcaria", "Wimbledon", "elegancja", "tenis", "rakieta", "Nadal"],
+  "Rafael Nadal": ["Roland Garros", "Hiszpania", "mączka", "tenis", "biceps", "Vamos"],
+  "Novak Djokovic": ["Serbia", "Australian Open", "tenis", "Djoker", "rakieta", "elastyczność"],
+  "Mike Tyson": ["boks", "ucho Holyfielda", "tatuaż na twarzy", "nokaut", "waga ciężka", "gołębie"],
+  "Muhammad Ali": ["boks", "float like a butterfly", "Cassius Clay", "rękawice", "mistrz", "Foreman"],
+  "Tiger Woods": ["golf", "kij", "zielona marynarka", "Masters", "dołek", "caddy"],
+  "Lewis Hamilton": ["Formula 1", "Mercedes", "siedem tytułów", "kask", "Silverstone", "bolid"],
+  "Max Verstappen": ["Red Bull", "Formula 1", "Holandia", "bolid", "mistrz", "wyścig"],
+  "Michael Schumacher": ["Ferrari", "Formula 1", "siedem tytułów", "kask", "Niemcy", "bolid"],
+  "Valentino Rossi": ["MotoGP", "46", "motocykl", "The Doctor", "Włochy", "żółty"],
+  "Zinedine Zidane": ["Zizou", "główka Materazziego", "Francja", "Real Madryt", "finał 2006", "pomocnik"],
+  "Kylian Mbappe": ["Francja", "PSG", "szybkość", "Mundial", "Real Madryt", "napastnik"],
+  Neymar: ["Brazylia", "PSG", "Barcelona", "drybling", "sztuczki", "siostra"],
+  "Erling Haaland": ["Norwegia", "Manchester City", "bramki", "robot", "Dortmund", "napastnik"],
+  "Zlatan Ibrahimovic": ["Szwecja", "Milan", "ego", "kung-fu", "bramki", "taekwondo"],
+  "Wayne Rooney": ["Manchester United", "Anglia", "Everton", "napastnik", "gol z przewrotki", "łysienie"],
+  "David Beckham": ["wolne", "Victoria", "Manchester United", "Real Madryt", "Anglia", "fryzury"],
+  Pele: ["Brazylia", "Santos", "trzy Mundiale", "król futbolu", "10", "piłka"],
+  "Diego Maradona": ["Argentyna", "ręka Boga", "Napoli", "Mundial 1986", "drybling", "10"],
+};
+
+const cartoonForbiddenOverrides = {
+  "Myszka Miki": ["Minnie", "uszy", "rękawiczki", "czerwone spodenki", "Pluto", "klub"],
+  "Kaczor Donald": ["kwakanie", "marynarz", "siostrzeńcy", "Daisy", "złość", "Sknerus"],
+  "Król Lew": ["Simba", "Mufasa", "sawanna", "Hakuna Matata", "Skaza", "Timon"],
+  Shrek: ["ogr", "Fiona", "Osioł", "bagno", "cebulka", "zielony"],
+  Elsa: ["lód", "Anna", "śnieg", "Let It Go", "królowa", "Arendelle"],
+  Olaf: ["bałwan", "marchewka", "lato", "Elsa", "śnieg", "przytulas"],
+  "Scooby-Doo": ["pies", "Shaggy", "zagadka", "duch", "chrupki", "van"],
+  SpongeBob: ["gąbka", "ananas", "Patrick", "Krusty Krab", "Skalmar", "Bikini Dolne"],
+  Minionek: ["banan", "żółty", "Gru", "okulary", "ogrodniczki", "bełkot"],
+  "Kubuś Puchatek": ["miód", "Prosiaczek", "Stumilowy Las", "Tygrysek", "miś", "czerwony kubraczek"],
+  Ariel: ["syrenka", "morze", "rude włosy", "Sebastian", "głos", "widelec"],
+  Alladyn: ["lampa", "Dżin", "dywan", "Jasmine", "Agrabah", "życzenia"],
+  Pikachu: ["piorun", "Ash", "Pokemon", "żółty", "pokeball", "prąd"],
+  "Tom i Jerry": ["kot", "mysz", "pościg", "pułapki", "fortepian", "bez słów"],
+  "Psi Patrol": ["Ryder", "szczeniaki", "Marshall", "Chase", "pojazdy", "ratunek"],
+  "Minnie Mouse": ["Miki", "mysz", "kokarda", "sukienka", "uszy", "rękawiczki"],
+  "Kaczka Daisy": ["Donald", "kokarda", "rzęsy", "kaczka", "fiolet", "kwakanie"],
+  Goofy: ["gapa", "wysoki", "czapka", "pies", "Miki", "niezdara"],
+  Pluto: ["pies", "obroża", "Miki", "żółty", "ogon", "szczekanie"],
+  "Sknerus McKwacz": ["sejf", "monety", "basen pieniędzy", "laska", "Donald", "Kaczogród"],
+  Hyzio: ["Donald", "siostrzeniec", "czerwona czapka", "trojaczki", "harcerze", "kaczor"],
+  Dyzio: ["Donald", "siostrzeniec", "niebieska czapka", "trojaczki", "harcerze", "kaczor"],
+  Zyzio: ["Donald", "siostrzeniec", "zielona czapka", "trojaczki", "harcerze", "kaczor"],
+  "Bugs Bunny": ["marchewka", "królik", "co jest doktorku", "Looney Tunes", "Elmer", "dziura"],
+  "Królik Bugs": ["marchewka", "Looney Tunes", "Elmer", "dziura", "szare uszy", "doktor"],
+  "Daffy Duck": ["kaczor", "czarny", "seplenienie", "Bugs", "Looney Tunes", "zazdrość"],
+  Tweety: ["kanarek", "klatka", "Sylwester", "żółty", "babcia", "ptaszek"],
+  Sylwester: ["kot", "Tweety", "wąsy", "pościg", "klatka", "seplenienie"],
+  "Struś Pędziwiatr": ["bip bip", "Kojot", "kanion", "szybkość", "pustynia", "ACME"],
+  Kojot: ["ACME", "Struś", "rakieta", "pułapka", "kanion", "pustynia"],
+  Taz: ["diabeł tasmański", "wir", "Looney Tunes", "zęby", "burza", "warczenie"],
+  "Speedy Gonzales": ["mysz", "Meksyk", "sombrero", "szybkość", "arriba", "ser"],
+  "Elmer Fudd": ["myśliwy", "strzelba", "Bugs", "łysy", "polowanie", "królik"],
+  "Yogi Bear": ["koszyk", "piknik", "Jellystone", "Boo Boo", "miś", "strażnik"],
+  Tom: ["kot", "Jerry", "fortepian", "pułapka", "dom", "pościg"],
+  Jerry: ["mysz", "Tom", "ser", "norka", "spryt", "pościg"],
+  Shaggy: ["Scooby", "kanapka", "zielona koszulka", "strach", "van", "głód"],
+  Velma: ["okulary", "pomarańczowy sweter", "zagadka", "lupa", "Scooby", "mądra"],
+  Daphne: ["fiolet", "rude włosy", "Scooby", "moda", "zagadka", "Fred"],
+  "Fred Jones": ["apaszka", "van", "Daphne", "pułapka", "Scooby", "lider"],
+  Flintstonowie: ["jaskinia", "kamień", "Yabba Dabba Doo", "Dino", "Bedrock", "auto na nogi"],
+  "Fred Flintstone": ["Yabba Dabba Doo", "Wilma", "kręgle", "Bedrock", "Dino", "kamienne auto"],
+  "Wilma Flintstone": ["Fred", "perły", "białe ubranie", "Bedrock", "Pebbles", "jaskinia"],
+  "Barney Rubble": ["Fred", "Betty", "sąsiad", "Bamm-Bamm", "Bedrock", "niski"],
+  Jetsonowie: ["kosmos", "latający samochód", "robot Rosie", "przyszłość", "Astro", "orbitujące miasto"],
+  "George Jetson": ["latający samochód", "Jane", "Elroy", "kosmos", "praca", "przycisk"],
+  Astro: ["pies", "Jetsonowie", "kosmos", "obroża", "szczekanie", "George"],
+  "Homer Simpson": ["donut", "Duff", "Springfield", "Marge", "elektrownia", "doh"],
+  "Marge Simpson": ["wysokie niebieskie włosy", "Homer", "perły", "Springfield", "mama", "rodzina"],
+  "Bart Simpson": ["deskorolka", "El Barto", "tablica", "Springfield", "proca", "psikus"],
+  "Lisa Simpson": ["saksofon", "perły", "mądra", "Springfield", "wegetarianka", "szkoła"],
+  "Maggie Simpson": ["smoczek", "niemowlę", "niebieska kokarda", "Simpsonowie", "raczkowanie", "mama"],
+  Smerfy: ["niebieskie", "grzyby", "wioska", "Azrael", "las", "smerfojagody"],
+  "Papa Smerf": ["czerwona czapka", "broda", "eliksir", "przywódca", "wioska", "smerfojagody"],
+  Smerfetka: ["blond włosy", "biała sukienka", "niebieska", "Gargamel", "wioska", "kwiat"],
+  Gargamel: ["Azrael", "czarny płaszcz", "zamek", "łapanie", "kocioł", "Smerfy"],
+  Maruda: ["narzekanie", "nie cierpię", "Smerfy", "mina", "biała czapka", "wioska"],
+  Ważniak: ["okulary", "książka", "mądralą", "Smerfy", "morały", "biała czapka"],
+  Osiłek: ["serce na ramieniu", "siła", "Smerfy", "mięśnie", "podnoszenie", "tatuaż"],
+  Asterix: ["Gal", "hełm", "mikstura", "Obelix", "Rzymianie", "wąsy"],
+  Obelix: ["menhir", "duży brzuch", "Idefix", "dzik", "siła", "wpadł do kotła"],
+  Idefix: ["pies", "Obelix", "mały", "drzewa", "Galowie", "szczekanie"],
+  Panoramix: ["druid", "mikstura", "kocioł", "biała broda", "Galowie", "złoty sierp"],
+  Kajko: ["Mirmiłowo", "Kokosz", "miecz", "mały woj", "Hegemon", "komiks"],
+  Kokosz: ["Kajko", "duży woj", "łakomstwo", "Mirmiłowo", "Hegemon", "hełm"],
+  Krecik: ["kopiec", "łopatka", "czarne futerko", "spodenki", "ziemia", "Czechy"],
+  Reksio: ["pies", "budka", "łatki", "podwórko", "Bielsko-Biała", "machanie ogonem"],
+  Bolek: ["Lolek", "podróże", "chłopiec", "krótkie spodenki", "przygoda", "Polska"],
+  Lolek: ["Bolek", "podróże", "mniejszy", "chłopiec", "przygoda", "Polska"],
+  "Miś Uszatek": ["klapnięte uszko", "dobranoc", "piżama", "miś", "łóżko", "piosenka"],
+  Kolargol: ["miś", "śpiew", "podróże", "kapelusz", "dobranocka", "przyjaciele"],
+  Muminek: ["Dolina Muminków", "biały troll", "Mama Muminka", "Tatuś Muminka", "dom", "książki"],
+  Włóczykij: ["harmonijka", "zielony kapelusz", "wędrówka", "namiot", "Muminki", "wolność"],
+  "Mała Mi": ["czerwona sukienka", "kok", "złośliwość", "malutka", "Muminki", "psoty"],
+  "Panna Migotka": ["bransoletka", "grzywka", "Muminek", "Dolina", "kokietka", "blask"],
+  Ryjek: ["kolekcje", "strach", "Muminki", "mały", "nerwowy", "Dolina"],
+  Paszczak: ["mundur", "rośliny", "Muminki", "zasady", "ogród", "kolekcjoner"],
+  "Pszczółka Maja": ["ul", "łąka", "skrzydła", "Gucio", "miód", "Willy"],
+  Gucio: ["truteń", "Maja", "paski", "łąka", "leniwy", "skrzydła"],
+  "Filip Konik Polny": ["skrzypce", "łąka", "Maja", "zielony", "owad", "muzyka"],
+  "Koziołek Matołek": ["Pacanów", "rogi", "wędrówka", "komiks", "buty", "kozioł"],
+  "Jacek i Agatka": ["kukiełki", "dobranocka", "para", "telewizja", "dzieci", "czarno-białe"],
+  "Kot Filemon": ["biały kot", "Bonifacy", "podwórko", "mleko", "ciekawość", "dobranocka"],
+  Bonifacy: ["czarny kot", "Filemon", "piec", "spanie", "podwórko", "starszy"],
+  Żwirek: ["Muchomorek", "Czechy", "czapka", "las", "sen", "dobranocka"],
+  Muchomorek: ["Żwirek", "grzyb", "Czechy", "las", "czapka", "dobranocka"],
+  Rumcajs: ["rozbójnik", "broda", "Jiczyn", "las", "pistolet", "kapelusz"],
+  Hanka: ["Rumcajs", "Cypisek", "las", "Czechy", "żona", "rozbójnik"],
+  Cypisek: ["Rumcajs", "Hanka", "dziecko", "las", "Czechy", "rodzina"],
+  "Wilk i Zając": ["Nu pogodi", "pościg", "Rosja", "papieros", "zając", "wilk"],
+  "Zając z Wilka i Zająca": ["Nu pogodi", "ucieczka", "Wilk", "uszy", "spryt", "Rosja"],
+  "Wilk z Wilka i Zająca": ["Nu pogodi", "Zając", "pościg", "papieros", "mundur", "Rosja"],
+  "Czerwony Kapturek": ["wilk", "babcia", "koszyk", "las", "czerwony płaszcz", "myśliwy"],
+  Prosiaczek: ["różowy", "Stumilowy Las", "Kubuś", "mały", "strach", "szalik"],
+  Tygrysek: ["skakanie", "paski", "ogon", "Kubuś", "pomarańczowy", "energia"],
+  Kłapouchy: ["osioł", "smutek", "ogon", "kokarda", "Stumilowy Las", "szary"],
+  "Królik z Kubusia": ["ogród", "marchewki", "porządek", "Kubuś", "nora", "nerwowy"],
+  Sowa: ["mądrość", "Stumilowy Las", "okulary", "drzewo", "Kubuś", "listy"],
+  Maleństwo: ["kangurek", "mama", "Stumilowy Las", "Kubuś", "mały", "torba"],
+  Kangurzyca: ["Maleństwo", "torba", "mama", "Stumilowy Las", "opieka", "kangur"],
+  Pinokio: ["nos", "kłamstwo", "Geppetto", "marionetka", "świerszcz", "drewno"],
+  "Jiminy Cricket": ["świerszcz", "sumienie", "Pinokio", "cylinder", "parasol", "gwiazda"],
+  Dumbo: ["duże uszy", "słoń", "cyrk", "latanie", "piórko", "mama"],
+  Bambi: ["jelonek", "las", "mama", "Tuptuś", "śnieg", "poroże"],
+  Tuptuś: ["królik", "Bambi", "łapka", "las", "stukanie", "przyjaciel"],
+  "Piotruś Pan": ["Nibylandia", "latanie", "Dzwoneczek", "Wendy", "cień", "wieczny chłopiec"],
+  Dzwoneczek: ["wróżka", "pyłek", "Piotruś", "skrzydła", "zazdrość", "Nibylandia"],
+  "Kapitan Hak": ["hak", "pirat", "krokodyl", "statek", "Piotruś", "wąsy"],
+  Wendy: ["Piotruś", "Nibylandia", "dzieci", "nocna koszula", "latanie", "opowieści"],
+  Mowgli: ["dżungla", "wilki", "Baloo", "Bagheera", "chłopiec", "Shere Khan"],
+  Baloo: ["niedźwiedź", "Mowgli", "luz", "dżungla", "piosenka", "miód"],
+  Bagheera: ["pantera", "Mowgli", "czarny", "dżungla", "rozsądek", "pazury"],
+  "Shere Khan": ["tygrys", "Mowgli", "dżungla", "wróg", "pazury", "ogień"],
+  Kopciuszek: ["pantofelek", "dynia", "bal", "macocha", "północ", "wróżka"],
+  "Śpiąca Królewna": ["wrzeciono", "sen", "Maleficent", "książę", "róża", "zamek"],
+  "Królewna Śnieżka": ["jabłko", "krasnoludki", "lustro", "zła królowa", "las", "kopalnia"],
+  "Siedmiu Krasnoludków": ["Śnieżka", "kopalnia", "kilofy", "domek", "hej ho", "siedem"],
+  Grumpy: ["Śnieżka", "krasnoludek", "zrzęda", "mina", "kopalnia", "czapka"],
+  Sebastian: ["krab", "Ariel", "morze", "jamajski akcent", "muszla", "dyrygent"],
+  Florek: ["rybka", "Ariel", "płetwy", "nieśmiały", "morze", "przyjaciel"],
+  Urszula: ["morska wiedźma", "macki", "głos", "Ariel", "czarny", "umowa"],
+  Dżin: ["lampa", "życzenia", "niebieski", "Alladyn", "magia", "bransoletki"],
+  Jasmine: ["pałac", "tygrys Rajah", "dywan", "Alladyn", "Agrabah", "księżniczka"],
+  Abu: ["małpka", "Alladyn", "kamizelka", "kradzież", "dywan", "Agrabah"],
+  Jafar: ["wezyr", "laska z kobrą", "Iago", "lampa", "Agrabah", "czarny charakter"],
+  Bella: ["książki", "róża", "zamek", "Bestia", "żółta suknia", "klątwa"],
+  Bestia: ["róża", "zamek", "Bella", "klątwa", "futro", "książę"],
+  Gaston: ["mięśnie", "Bella", "lustro", "myśliwy", "tawerna", "próżność"],
+  Lumiere: ["świecznik", "zamek", "Bella", "płomień", "francuski", "kolacja"],
+  "Pani Imbryk": ["czajnik", "Filiżanek", "zamek", "Bella", "herbata", "klątwa"],
+  Simba: ["lew", "Mufasa", "sawanna", "Hakuna Matata", "Skaza", "grzywa"],
+  Mufasa: ["ojciec", "Simba", "lew", "król", "kanion", "głos z nieba"],
+  Nala: ["lwica", "Simba", "sawanna", "przyjaciółka", "polowanie", "królowa"],
+  Timon: ["surykatka", "Pumba", "Hakuna Matata", "robaki", "Simba", "taniec"],
+  Pumba: ["guziec", "Timon", "Hakuna Matata", "zapach", "robaki", "kły"],
+  Skaza: ["blizna", "hieny", "Mufasa", "Simba", "czarny charakter", "lew"],
+  Rafiki: ["mandryl", "laska", "Simba", "malunek", "drzewo", "mądrość"],
+  Pocahontas: ["wiatr", "rzeka", "John Smith", "natura", "kolory", "Indianie"],
+  Mulan: ["przebranie", "Chiny", "Mushu", "wojna", "honor", "miecz"],
+  Mushu: ["smok", "Mulan", "mały", "strażnik", "ogień", "gong"],
+  Herkules: ["Zeus", "siła", "Olimp", "Pegaz", "Hades", "półbóg"],
+  Hades: ["niebieskie płomienie", "podziemie", "Herkules", "złość", "Megara", "Zeus"],
+  Megara: ["Herkules", "fioletowa suknia", "Hades", "ironia", "miłość", "Grecja"],
+  Tarzan: ["liany", "dżungla", "małpy", "Jane", "krzyk", "drzewo"],
+  Jane: ["Tarzan", "żółta sukienka", "dżungla", "Anglia", "rysunki", "parasolka"],
+  Quasimodo: ["dzwonnik", "Notre Dame", "garb", "katedra", "Esmeralda", "dzwony"],
+  Esmeralda: ["taniec", "cyganka", "Notre Dame", "Quasimodo", "koza", "Paryż"],
+  Kuzco: ["cesarz", "lama", "Kronk", "Peru", "Yzma", "ego"],
+  Yzma: ["fiolet", "Kronk", "mikstura", "Kuzco", "laboratorium", "kot"],
+  Roszpunka: ["długie włosy", "wieża", "latarnie", "patelnia", "Flynn", "kameleon"],
+  "Flynn Rider": ["Roszpunka", "złodziej", "wanted", "patelnia", "latarnie", "torba"],
+  Merida: ["łuk", "Szkocja", "rude loki", "niedźwiedź", "odwaga", "strzały"],
+  Vaiana: ["ocean", "Maui", "wyspa", "serce Te Fiti", "łódź", "Polinezja"],
+  Maui: ["hak", "tatuaże", "Vaiana", "półbóg", "ocean", "kształtowanie"],
+  Anna: ["Elsa", "siostra", "Arendelle", "Kristoff", "zamek", "optymizm"],
+  Sven: ["renifer", "Kristoff", "marchewka", "sanie", "Kraina lodu", "poroże"],
+  Kristoff: ["Sven", "lód", "Anna", "sanie", "góry", "renifer"],
+  Fiona: ["Shrek", "księżniczka", "ogr", "zielona", "zamek", "karate"],
+  Osioł: ["Shrek", "gadanie", "Smoczyca", "kopyta", "humor", "przyjaciel"],
+  "Kot w Butach": ["kapelusz", "szabla", "wielkie oczy", "buty", "Shrek", "miauczenie"],
+  "Lord Farquaad": ["niski", "Duloc", "Shrek", "zamek", "Fiona", "turniej"],
+  Ciastek: ["piernik", "lukier", "guziczki", "Shrek", "Duloc", "ciastko"],
+  "Król Julian": ["lemur", "Madagaskar", "wyginam śmiało ciało", "korona", "Mort", "impreza"],
+  "Alex Lew": ["lew", "zoo", "Nowy Jork", "Madagaskar", "grzywa", "gwiazda"],
+  "Marty Zebra": ["zebra", "Alex", "Madagaskar", "paski", "urodziny", "zoo"],
+  "Gloria Hipopotam": ["hipopotam", "Madagaskar", "Marty", "Melman", "zoo", "pewność siebie"],
+  Melman: ["żyrafa", "lekarstwa", "Gloria", "Madagaskar", "szyja", "hipochondryk"],
+  Skipper: ["pingwin", "komandos", "Madagaskar", "plan", "Kowalski", "dowódca"],
+  Kowalski: ["pingwin", "analiza", "Skipper", "notatnik", "Madagaskar", "wynalazki"],
+  Rico: ["pingwin", "wypluwanie", "dynamit", "Madagaskar", "Skipper", "milczący"],
+  Szeregowy: ["pingwin", "słodki", "Skipper", "Madagaskar", "młody", "grupa"],
+  "Po z Kung Fu Pandy": ["panda", "makaron", "Smoczy Wojownik", "Shifu", "kung fu", "kluski"],
+  Tygrysica: ["kung fu", "Po", "pasiaste futro", "Piątka", "siła", "klasztor"],
+  "Mistrz Shifu": ["czerwona panda", "Po", "nauczyciel", "kij", "kung fu", "mistrz"],
+  Szczerbatek: ["smok", "Czkawka", "czarny", "Nocna Furia", "latanie", "ogon"],
+  Czkawka: ["Szczerbatek", "wiking", "Berk", "proteza", "smok", "Astrid"],
+  Astrid: ["Czkawka", "topór", "Berk", "Szczerbatek", "blond warkocz", "wiking"],
+  Chudy: ["kowboj", "Toy Story", "Andy", "kapelusz", "Buzz", "sznurek"],
+  "Buzz Astral": ["kosmos", "laser", "Toy Story", "Chudy", "skrzydła", "do nieskończoności"],
+  Jessie: ["kowbojka", "Toy Story", "czerwony kapelusz", "Andy", "jodłowanie", "warkocz"],
+  "Pan Bulwa": ["ziemniak", "Toy Story", "części twarzy", "wąsy", "żona", "zabawka"],
+  Rex: ["dinozaur", "Toy Story", "zielony", "strachliwy", "małe ręce", "zabawka"],
+  Hamm: ["skarbonka", "Toy Story", "świnka", "monety", "Andy", "zabawka"],
+  "Bo Peep": ["pasterka", "Toy Story", "laska", "owce", "porcelana", "Chudy"],
+  Sulley: ["niebieskie futro", "rogi", "Mike", "Boo", "drzwi", "potwory"],
+  "Mike Wazowski": ["jedno oko", "zielony", "Sulley", "Boo", "mikrofon", "strach"],
+  Boo: ["dziewczynka", "Sulley", "drzwi", "potwory", "różowa koszulka", "kicia"],
+  "Pan Iniemamocny": ["super siła", "rodzina", "czerwony kostium", "Elastyna", "maska", "Bob"],
+  Elastyna: ["rozciąganie", "Helen", "rodzina", "czerwony kostium", "Pan Iniemamocny", "mama"],
+  Violet: ["niewidzialność", "pole siłowe", "ciemne włosy", "Iniemamocni", "Dash", "maska"],
+  Dash: ["szybkość", "Iniemamocni", "Violet", "bieganie po wodzie", "chłopiec", "maska"],
+  "Jack-Jack": ["niemowlę", "laserowe oczy", "ogień", "Iniemamocni", "smoczek", "moc"],
+  Nemo: ["błazenek", "mała płetwa", "Dory", "Marlin", "ocean", "akwarium"],
+  Dory: ["zapominanie", "niebieska ryba", "Nemo", "Marlin", "wielorybi", "adres"],
+  Marlin: ["ojciec", "Nemo", "Dory", "błazenek", "ocean", "nadopiekuńczy"],
+  "Bruce Rekin": ["rekin", "ryby to przyjaciele", "Nemo", "zęby", "Australia", "spotkanie"],
+  "Zygzak McQueen": ["wyścig", "czerwony samochód", "Ka-Chow", "Złomek", "Puchar", "Radiator Springs"],
+  Złomek: ["holownik", "rdza", "Zygzak", "Radiator Springs", "hak", "przyjaciel"],
+  Sally: ["Porsche", "niebieski samochód", "Radiator Springs", "Zygzak", "hotel", "tatuaż"],
+  Remy: ["szczur", "gotowanie", "Paryż", "Linguini", "ratatuj", "restauracja"],
+};
+
+const objectForbiddenOverrides = {
+  Telefon: ["dzwonić", "smartfon", "ekran", "numer", "ładowarka", "aplikacja"],
+  Rower: ["pedały", "koła", "łańcuch", "kierownica", "siodełko", "dzwonek"],
+  Plecak: ["szkoła", "ramiona", "zamek", "książki", "kieszeń", "nosić"],
+  Pilot: ["telewizor", "przyciski", "kanał", "bateria", "kanapa", "zmieniać"],
+  Okulary: ["szkła", "oprawki", "nos", "wzrok", "soczewki", "zauszniki"],
+  Zegar: ["wskazówki", "godzina", "tik-tak", "ściana", "czas", "tarcza"],
+  Klucz: ["drzwi", "zamek", "metal", "pęk", "otwierać", "zgubić"],
+  Parasolka: ["deszcz", "rączka", "rozłożyć", "mokro", "czasza", "ochrona"],
+  Książka: ["strony", "okładka", "autor", "biblioteka", "czytać", "rozdział"],
+  Lodówka: ["zimno", "jedzenie", "zamrażarka", "drzwi", "mleko", "kuchnia"],
+  Gitara: ["struny", "akord", "gryf", "kostka", "koncert", "instrument"],
+  Piłka: ["okrągła", "kopać", "rzucać", "bramka", "mecz", "sport"],
+  Latarka: ["światło", "ciemność", "bateria", "świecić", "noc", "ręka"],
+  Kamera: ["nagrywać", "obiektyw", "wideo", "statyw", "filmować", "operator"],
+  Klocki: ["Lego", "budować", "wieża", "kolory", "zabawka", "układać"],
+  Kubek: ["kawa", "herbata", "ucho", "gorące", "porcelana", "pić"],
+  Butelka: ["woda", "zakrętka", "napój", "szyjka", "plastik", "pić"],
+  Szklanka: ["woda", "sok", "szkło", "przezroczysta", "pić", "stół"],
+  Talerz: ["obiad", "płaski", "porcelana", "jedzenie", "zupa", "stół"],
+  Widelec: ["zęby", "sztućce", "nabijać", "obiad", "metal", "jeść"],
+  Nóż: ["ostrze", "kroić", "rękojeść", "sztućce", "ostry", "kuchnia"],
+  Łyżka: ["zupa", "sztućce", "nabierać", "metal", "jeść", "herbata"],
+  Garnek: ["pokrywka", "zupa", "gotować", "uchwyty", "kuchenka", "woda"],
+  Patelnia: ["smażyć", "olej", "rączka", "naleśniki", "jajko", "teflon"],
+  Czajnik: ["wrzątek", "woda", "gwizdek", "herbata", "para", "czaj"],
+  "Ekspres do kawy": ["ziarna", "espresso", "młynek", "filiżanka", "kapsułki", "barista"],
+  Mikrofalówka: ["podgrzewać", "talerz obrotowy", "drzwiczki", "minuty", "jedzenie", "promieniowanie"],
+  Piekarnik: ["piec", "blacha", "temperatura", "ciasto", "grzałka", "kuchnia"],
+  Toster: ["grzanki", "chleb", "wyskakuje", "opiekacz", "śniadanie", "chrupiące"],
+  Blender: ["miksować", "koktajl", "ostrza", "owoce", "kielich", "zupa krem"],
+  Mikser: ["ciasto", "ubijać", "trzepaczki", "masa", "miska", "prędkość"],
+  "Deska do krojenia": ["kroić", "nóż", "warzywa", "drewno", "kuchnia", "plasterki"],
+  Miska: ["zupa", "sałatka", "okrągła", "porcja", "kuchnia", "płatki"],
+  Sitko: ["odcedzać", "makaron", "dziurki", "mąka", "przesiewać", "metal"],
+  Tarka: ["ścierać", "ser", "marchewka", "oczka", "ostre", "kuchnia"],
+  Nożyczki: ["ciąć", "ostrza", "papier", "uchwyty", "krawiec", "rozciąć"],
+  "Taśma klejąca": ["klej", "rolka", "przezroczysta", "pakować", "oderwać", "papier"],
+  Klej: ["sklejać", "tubka", "papier", "sztyft", "lepki", "plastyka"],
+  Długopis: ["atrament", "pisać", "wkład", "klik", "kartka", "niebieski"],
+  Ołówek: ["grafit", "rysować", "temperować", "gumka", "drewno", "szkic"],
+  Gumka: ["ścierać", "ołówek", "błędy", "biała", "szkoła", "okruchy"],
+  Temperówka: ["ostrzyć", "ołówek", "wiórki", "dziurka", "ostrze", "szkoła"],
+  Linijka: ["mierzyć", "centymetry", "prosta", "kreska", "szkoła", "plastik"],
+  Zeszyt: ["kartki", "kratka", "linie", "lekcje", "notatki", "okładka"],
+  Notes: ["notatki", "kartki", "zapisać", "mały", "lista", "biurko"],
+  Kalendarz: ["daty", "miesiące", "dni", "rok", "terminy", "ściana"],
+  Koperta: ["list", "znaczek", "adres", "papier", "zakleić", "poczta"],
+  Znaczek: ["poczta", "list", "nakleić", "koperta", "opłata", "kolekcja"],
+  Drukarka: ["papier", "tusz", "drukować", "skaner", "kartki", "toner"],
+  Laptop: ["klawiatura", "ekran", "bateria", "touchpad", "komputer", "ładowarka"],
+  Klawiatura: ["klawisze", "litery", "spacja", "pisanie", "komputer", "enter"],
+  "Mysz komputerowa": ["klik", "kursor", "scroll", "podkładka", "komputer", "USB"],
+  Monitor: ["ekran", "komputer", "piksele", "biurko", "kabel", "rozdzielczość"],
+  Głośnik: ["dźwięk", "muzyka", "bas", "volume", "kabel", "kolumna"],
+  Słuchawki: ["uszy", "muzyka", "kabel", "bluetooth", "cisza", "mikrofon"],
+  Mikrofon: ["głos", "nagrywać", "śpiewać", "podcast", "statyw", "dźwięk"],
+  Router: ["internet", "Wi-Fi", "anteny", "hasło", "modem", "sieć"],
+  Pendrive: ["USB", "plik", "pamięć", "komputer", "mały", "zapis"],
+  "Dysk twardy": ["pamięć", "komputer", "pliki", "SSD", "HDD", "backup"],
+  Tablet: ["ekran dotykowy", "aplikacje", "ładowarka", "iPad", "palec", "rysik"],
+  Zegarek: ["nadgarstek", "godzina", "pasek", "tarcza", "wskazówki", "czas"],
+  Budzik: ["alarm", "rano", "dzwoni", "drzemka", "godzina", "łóżko"],
+  Termometr: ["temperatura", "gorączka", "stopnie", "rtęć", "pomiar", "ciało"],
+  Waga: ["kilogramy", "ważyć", "łazienka", "liczby", "dieta", "pomiar"],
+  Lustro: ["odbicie", "twarz", "łazienka", "rama", "patrzeć", "szkło"],
+  Szczotka: ["włosy", "czesać", "ząbki", "rączka", "fryzura", "splątane"],
+  Grzebień: ["włosy", "zęby", "czesać", "kieszeń", "fryzura", "plastik"],
+  Suszarka: ["włosy", "gorące powietrze", "łazienka", "dmuchać", "kabel", "fryzura"],
+  Ręcznik: ["wycierać", "mokry", "łazienka", "plaża", "frotte", "kąpiel"],
+  Mydło: ["myć", "piana", "ręce", "kostka", "zapach", "łazienka"],
+  Szampon: ["włosy", "piana", "butelka", "mycie", "prysznic", "zapach"],
+  "Pasta do zębów": ["szczoteczka", "mięta", "tubka", "zęby", "fluor", "mycie"],
+  Szczoteczka: ["zęby", "włosie", "pasta", "myć", "łazienka", "rączka"],
+  "Maszynka do golenia": ["broda", "ostrza", "golenie", "pianka", "łazienka", "zarost"],
+  Perfumy: ["zapach", "flakon", "psikać", "szyja", "elegancja", "aromat"],
+  Krem: ["smarować", "skóra", "tubka", "nawilżać", "twarz", "kosmetyk"],
+  Plaster: ["rana", "skaleczenie", "opatrunek", "klejący", "apteczka", "palec"],
+  Bandaż: ["opatrunek", "owijać", "rana", "gaza", "pierwsza pomoc", "biały"],
+  Apteczka: ["leki", "plaster", "bandaż", "pierwsza pomoc", "czerwony krzyż", "ratunek"],
+  Młotek: ["gwoździe", "uderzać", "trzonek", "majsterkowanie", "narzędzie", "deska"],
+  Śrubokręt: ["śruby", "wkręcać", "końcówka", "rączka", "krzyżak", "narzędzie"],
+  Wiertarka: ["dziura", "wiertło", "hałas", "ściana", "akumulator", "narzędzie"],
+  Piła: ["ciąć", "zęby", "drewno", "deska", "ostrze", "narzędzie"],
+  "Klucz francuski": ["nakrętka", "śruba", "regulowany", "metal", "warsztat", "narzędzie"],
+  Miarka: ["centymetry", "mierzyć", "taśma", "zwijana", "długość", "budowa"],
+  Poziomica: ["bąbelek", "równo", "ściana", "budowa", "poziom", "narzędzie"],
+  Gwoździe: ["młotek", "wbijać", "metal", "deska", "ostre", "budowa"],
+  Śruby: ["gwint", "wkręcać", "śrubokręt", "nakrętka", "metal", "warsztat"],
+  Żarówka: ["światło", "lampa", "gwint", "prąd", "świecić", "klosz"],
+  Przedłużacz: ["gniazdko", "kabel", "prąd", "listwa", "wtyczka", "długość"],
+  Kabel: ["przewód", "wtyczka", "ładowarka", "prąd", "plątać", "USB"],
+  Gniazdko: ["wtyczka", "prąd", "ściana", "kontakt", "ładowarka", "dziurki"],
+  Bateria: ["energia", "paluszek", "pilot", "ładowanie", "plus minus", "akumulator"],
+  Telewizor: ["ekran", "pilot", "kanał", "serial", "salon", "oglądać"],
+  Radio: ["stacja", "antenna", "muzyka", "głośnik", "częstotliwość", "audycja"],
+  Aparat: ["zdjęcie", "obiektyw", "migawka", "lampa błyskowa", "fotograf", "kadr"],
+  Projektor: ["rzutnik", "ściana", "prezentacja", "obraz", "kino", "ekran"],
+  "Ramka na zdjęcie": ["fotografia", "szkło", "ściana", "wspomnienie", "obramowanie", "komoda"],
+  Obraz: ["rama", "ściana", "malarstwo", "płótno", "kolory", "galeria"],
+  Wazon: ["kwiaty", "woda", "szkło", "stół", "bukiet", "dekoracja"],
+  Doniczka: ["ziemia", "roślina", "podstawka", "parapet", "kwiat", "podlewać"],
+  Kwiat: ["płatki", "łodyga", "zapach", "bukiet", "wazon", "liście"],
+  Świeczka: ["płomień", "wosk", "knot", "zapach", "urodziny", "ogień"],
+  Zapałki: ["pudełko", "siarka", "zapalić", "ogień", "drewienka", "pocieranie"],
+  Zapalniczka: ["ogień", "gaz", "płomień", "kieszeń", "klik", "papieros"],
+  Kosz: ["śmieci", "wyrzucać", "worek", "odpady", "biurko", "pusty"],
+  Wiadro: ["woda", "uchwyt", "mop", "sprzątanie", "plastik", "nosić"],
+  Mop: ["podłoga", "wiadro", "myć", "kij", "mokry", "sprzątanie"],
+  Miotła: ["zamiatać", "kij", "kurz", "podłoga", "włosie", "czarownica"],
+  Szufelka: ["zamiatać", "miotła", "śmieci", "uchwyt", "kurz", "podłoga"],
+  Odkurzacz: ["kurz", "rura", "ssanie", "dywan", "worek", "hałas"],
+  Żelazko: ["prasować", "para", "ubrania", "gorące", "deska", "kabel"],
+  "Deska do prasowania": ["żelazko", "ubrania", "składana", "pokrowiec", "para", "prasować"],
+  Pralka: ["pranie", "bęben", "proszek", "wirowanie", "ubrania", "łazienka"],
+  "Suszarka do ubrań": ["pranie", "ciepłe powietrze", "bęben", "ubrania", "łazienka", "suche"],
+  "Kosz na pranie": ["brudne ubrania", "łazienka", "bielizna", "pralka", "uchwyty", "sortowanie"],
+  Spinacz: ["papier", "biuro", "metal", "łączyć", "dokumenty", "mały"],
+  Wieszak: ["ubrania", "szafa", "ramiona", "hak", "kurtka", "drewniany"],
+  Szafa: ["ubrania", "drzwi", "półki", "wieszak", "sypialnia", "przechowywać"],
+  Komoda: ["szuflady", "ubrania", "sypialnia", "uchwyty", "blat", "przechowywać"],
+  Biurko: ["praca", "komputer", "szuflada", "krzesło", "lampka", "blat"],
+  Krzesło: ["siedzieć", "oparcie", "nogi", "stół", "poduszka", "jadalnia"],
+  Stół: ["blat", "nogi", "obiad", "krzesła", "jadalnia", "nakrycie"],
+  Kanapa: ["salon", "siedzieć", "poduszki", "pilot", "goście", "wypoczynek"],
+  Fotel: ["siedzieć", "oparcie", "podłokietniki", "salon", "wygodny", "czytać"],
+  Łóżko: ["spać", "materac", "poduszka", "kołdra", "sypialnia", "noc"],
+  Materac: ["łóżko", "sprężyny", "spać", "miękki", "sypialnia", "pianka"],
+  Poduszka: ["głowa", "spać", "poszewka", "miękka", "łóżko", "puch"],
+  Kołdra: ["przykrywać", "sen", "ciepło", "łóżko", "poszwa", "noc"],
+  Koc: ["ciepło", "kanapa", "przykryć", "miękki", "wieczór", "piknik"],
+  Dywan: ["podłoga", "włosie", "odkurzać", "salon", "miękki", "wzór"],
+  Zasłona: ["okno", "karnisz", "fałdy", "zasłaniać", "pokój", "prywatność"],
+  Roleta: ["okno", "zwijać", "sznurek", "słońce", "zaciemniać", "prowadnica"],
+  Lampa: ["światło", "żarówka", "klosz", "prąd", "sufit", "włącznik"],
+  "Lampka nocna": ["łóżko", "światło", "stolik", "noc", "czytać", "klosz"],
+  Półka: ["książki", "ściana", "deska", "przechowywać", "kurz", "wspornik"],
+  Drabina: ["szczeble", "wchodzić", "wysoko", "malowanie", "aluminium", "rozstawiana"],
+  Walizka: ["podróż", "kółka", "rączka", "lotnisko", "ubrania", "zamek"],
+  Torba: ["nosić", "uchwyty", "zakupy", "ramię", "rzeczy", "suwak"],
+  Portfel: ["pieniądze", "karty", "kieszeń", "skóra", "banknoty", "dokumenty"],
+  Pasek: ["spodnie", "klamra", "skóra", "dziurki", "talia", "zapinać"],
+  Czapka: ["głowa", "daszek", "zimno", "wełna", "uszy", "ubranie"],
+  Rękawiczki: ["dłonie", "palce", "zimno", "para", "wełna", "narciarskie"],
+  Szalik: ["szyja", "zimno", "wełna", "owijać", "kurtka", "zima"],
+  Kurtka: ["rękawy", "zamek", "kaptur", "zimno", "ubranie", "kieszenie"],
+  Buty: ["stopy", "sznurówki", "podeszwa", "chodzić", "para", "rozmiar"],
+  Kalosze: ["deszcz", "guma", "kałuże", "wysokie", "błoto", "stopy"],
+  Parasol: ["deszcz", "rączka", "czasza", "rozkładać", "mokro", "chodnik"],
+  "Okulary przeciwsłoneczne": ["słońce", "ciemne szkła", "nos", "oprawki", "plaża", "UV"],
+  Klucze: ["drzwi", "zamek", "pęk", "brelok", "otwierać", "metal"],
+  Brelok: ["klucze", "kółko", "ozdoba", "mały", "pamiątka", "przypiąć"],
+  "Karta płatnicza": ["bank", "PIN", "terminal", "plastik", "płacić", "chip"],
+  Moneta: ["metal", "reszta", "nominał", "portfel", "okrągła", "orzeł"],
+  Banknot: ["papier", "nominał", "portfel", "pieniądze", "złoty", "kasjer"],
+  Mapa: ["droga", "kierunek", "skala", "miasto", "podróż", "nawigacja"],
+  Kompas: ["północ", "igła", "kierunek", "magnes", "wyprawa", "mapa"],
+  Namiot: ["biwak", "śledzie", "tropik", "spanie", "las", "rozbijać"],
+  Śpiwór: ["spanie", "biwak", "zamek", "ciepło", "zwijać", "namiot"],
+  Bidon: ["woda", "rower", "sport", "zakrętka", "pić", "trening"],
+  Termos: ["ciepło", "herbata", "kawa", "zakrętka", "wycieczka", "izolacja"],
+  Lina: ["wiązać", "węzeł", "wspinaczka", "ciągnąć", "gruba", "ratunek"],
+  Kask: ["głowa", "ochrona", "rower", "budowa", "narciarski", "skorupa"],
+  Hulajnoga: ["kierownica", "deck", "odpychać", "koła", "miasto", "hamulec"],
+  Deskorolka: ["deska", "kółka", "triki", "rampa", "jeździć", "griptape"],
+  Rolki: ["kółka", "buty", "hamulec", "jazda", "chodnik", "ochraniacze"],
+  Narty: ["śnieg", "stok", "kijki", "buty narciarskie", "zjazd", "wiązania"],
+  Sanki: ["śnieg", "górka", "zjazd", "dzieci", "płozy", "zima"],
+  Łyżwy: ["lód", "ostrze", "lodowisko", "buty", "piruet", "zima"],
+  "Piłka nożna": ["futbol", "bramka", "murawa", "kopać", "mecz", "okrągła"],
+  "Piłka do kosza": ["kosz", "obręcz", "parkiet", "kozłować", "NBA", "pomarańczowa"],
+  "Rakieta tenisowa": ["kort", "struny", "serwis", "tenis", "piłeczka", "uchwyt"],
+  Hantle: ["ciężary", "siłownia", "biceps", "trening", "para", "podnosić"],
+  Skakanka: ["skakać", "sznurek", "rączki", "trening", "dzieci", "kondycja"],
+  "Karty do gry": ["talia", "as", "król", "tasować", "poker", "kolory"],
+  "Kostka do gry": ["oczka", "rzucać", "sześć", "planszówka", "los", "sześcian"],
+  Puzzle: ["układać", "elementy", "obrazek", "pudełko", "brakuje", "kawałki"],
+  "Miś pluszowy": ["pluszak", "futro", "przytulanka", "łóżko", "zabawka", "dziecko"],
+  Lalka: ["zabawka", "włosy", "sukienka", "dziecko", "Barbie", "ubierać"],
+  Samochodzik: ["zabawka", "koła", "tor", "mały", "resorak", "jeździć"],
+  Jojo: ["sznurek", "krążek", "góra dół", "trik", "ręka", "zabawka"],
+  Bączek: ["kręcić", "wiruje", "zabawka", "czubek", "kolory", "ręka"],
+  Balon: ["powietrze", "nadmuchać", "urodziny", "pęka", "gumowy", "sznurek"],
+  Kredki: ["rysować", "kolory", "dzieci", "pudełko", "ostrzyć", "papier"],
+  Farby: ["malować", "pędzel", "kolory", "plakatowe", "woda", "paleta"],
+  Pędzel: ["malować", "włosie", "farba", "rączka", "obraz", "artysta"],
+  Plastelina: ["lepić", "kolory", "miękka", "figurki", "dzieci", "wałkować"],
+  Pianino: ["klawisze", "fortepian", "melodia", "czarne białe", "grać", "nuty"],
+  Bęben: ["pałeczki", "rytm", "uderzać", "perkusja", "skóra", "hałas"],
+  Flet: ["dmuchać", "dziurki", "melodia", "instrument", "drewniany", "szkoła"],
+  Skrzypce: ["smyczek", "struny", "broda", "orkiestra", "futerał", "klasyka"],
+  Trąbka: ["dmuchać", "ustnik", "jazz", "wentyle", "blaszana", "głośna"],
+  Akwarium: ["rybki", "woda", "szyba", "filtr", "rośliny", "żwirek"],
+  Karma: ["jedzenie", "pies", "kot", "miska", "granulki", "zwierzę"],
+  Smycz: ["pies", "spacer", "obroża", "rączka", "prowadzić", "karabińczyk"],
+  Obroża: ["szyja", "pies", "klamra", "smycz", "identyfikator", "skóra"],
+  "Miska dla psa": ["karma", "woda", "pies", "podłoga", "metalowa", "jedzenie"],
+  Klatka: ["ptak", "pręty", "drzwiczki", "zwierzę", "zamknięcie", "chomik"],
+  Siodło: ["koń", "jeździec", "strzemiona", "skóra", "jazda", "grzbiet"],
+  Wędka: ["ryby", "żyłka", "spławik", "haczyki", "jezioro", "łowić"],
+  Haczyk: ["ryba", "wędka", "ostry", "przynęta", "żyłka", "zaczepić"],
+};
+
 const forbiddenHintRules = [
   { match: ["Leia", "Han Solo", "Chewbacca", "Obi-Wan", "Anakin", "Kylo", "Rey", "Grogu", "Mandalorianin", "R2-D2", "C-3PO"], words: ["Gwiezdne wojny", "moc", "miecz", "kosmos", "Jedi", "statek"] },
   { match: ["Gimli", "Bilbo", "Sauron", "Galadriela", "Saruman"], words: ["pierścień", "hobbit", "Mordor", "elf", "czarodziej", "Śródziemie"] },
@@ -433,6 +1042,14 @@ function specificForbidden(name) {
     return forbiddenOverrides[name];
   }
 
+  if (knownPersonForbiddenOverrides[name]) {
+    return knownPersonForbiddenOverrides[name];
+  }
+
+  if (cartoonForbiddenOverrides[name]) {
+    return cartoonForbiddenOverrides[name];
+  }
+
   const hint = contextualForbiddenRules.find((rule) => rule.match.some((phrase) => matchesPhrase(name, phrase)));
   return hint ? hint.words : null;
 }
@@ -550,10 +1167,13 @@ const movieExcludedNames = [
 
 const strictDeckOptions = { requireSpecific: true };
 
-const classicDeck = deckOf200(cards, knownPeopleNames, knownForbiddenPool, classicExcludedNames, strictDeckOptions);
-const cartoonDeck = deckOf200(cartoonCards, classicCartoonNames, cartoonForbiddenPool, cartoonExcludedNames, strictDeckOptions);
+const classicDeck = deckOf200(cards, knownPeopleNames, knownForbiddenPool, classicExcludedNames, strictDeckOptions)
+  .map((card) => ({ ...card, forbidden: knownPersonForbiddenOverrides[card.name] || card.forbidden }));
+const cartoonDeck = deckOf200(cartoonCards, classicCartoonNames, cartoonForbiddenPool, cartoonExcludedNames, strictDeckOptions)
+  .map((card) => ({ ...card, forbidden: cartoonForbiddenOverrides[card.name] || card.forbidden }));
 const movieDeck = deckOf200(movieCards, iconicMovieNames, movieForbiddenPool, movieExcludedNames, strictDeckOptions);
-const objectDeck = deckOf200(objectCards, objectNames, objectForbiddenPool, [], strictDeckOptions);
+const objectDeck = deckOf200(objectCards, objectNames, objectForbiddenPool, [], strictDeckOptions)
+  .map((card) => ({ ...card, forbidden: objectForbiddenOverrides[card.name] || card.forbidden }));
 
 const decks = {
   classic: classicDeck,
@@ -584,6 +1204,7 @@ const state = {
   maxSeconds: 60,
   running: false,
   timerId: null,
+  summaryOpen: false,
   deck: shuffle([...decks.classic]),
 };
 
@@ -607,6 +1228,15 @@ const els = {
   redSpeaker: document.querySelector("#red-speaker"),
   redGuesser: document.querySelector("#red-guesser"),
   titleEnter: document.querySelector("#title-enter"),
+  roundSummary: document.querySelector("#round-summary"),
+  summaryKicker: document.querySelector("#summary-kicker"),
+  summaryTitle: document.querySelector("#summary-title"),
+  summaryMessage: document.querySelector("#summary-message"),
+  summaryScoreYellow: document.querySelector("#summary-score-yellow"),
+  summaryScoreRed: document.querySelector("#summary-score-red"),
+  summaryNextLabel: document.querySelector("#summary-next-label"),
+  summaryNextTeam: document.querySelector("#summary-next-team"),
+  summaryContinue: document.querySelector("#summary-continue"),
 };
 
 function shuffle(list) {
@@ -756,15 +1386,57 @@ function nextCard() {
   renderCard();
 }
 
-function finishTurn(reason) {
-  const team = state.currentTeam === "yellow" ? "Niebiescy" : "Różowi";
+function teamLabel(team) {
+  return team === "yellow" ? "Niebiescy" : "Różowi";
+}
+
+function showRoundSummary({ previousTeam, reason, type, wasFinalRound }) {
+  const nextTeamName = teamLabel(state.currentTeam);
+  const titles = {
+    time: "Czas minął!",
+    foul: "Zakazane słowo!",
+    manual: "Koniec rundy!",
+  };
+  const messages = {
+    time: `${previousTeam} kończą turę, bo skończył się czas.`,
+    foul: `${previousTeam} kończą turę po użyciu zakazanego słowa.`,
+    manual: `${previousTeam} kończą turę. Następna karta jest gotowa.`,
+  };
+
+  state.summaryOpen = true;
+  els.roundSummary.classList.remove("is-hidden", "is-red-summary");
+  els.roundSummary.classList.toggle("is-red-summary", state.currentTeam === "red");
+  els.summaryKicker.textContent = wasFinalRound ? "Koniec gry" : "Koniec rundy";
+  els.summaryTitle.textContent = wasFinalRound ? "Koniec gry!" : titles[type];
+  els.summaryMessage.textContent = wasFinalRound
+    ? `${previousTeam} zakończyli ostatnią rundę. Sprawdźcie wynik.`
+    : messages[type];
+  els.summaryScoreYellow.textContent = state.scores.yellow;
+  els.summaryScoreRed.textContent = state.scores.red;
+  els.summaryNextLabel.textContent = wasFinalRound ? "Wynik końcowy" : "Teraz grają";
+  els.summaryNextTeam.textContent = wasFinalRound ? `${state.scores.yellow} : ${state.scores.red}` : nextTeamName;
+  els.summaryContinue.textContent = wasFinalRound ? "Zamknij" : "Dalej";
+  requestAnimationFrame(() => els.summaryContinue.focus());
+}
+
+function hideRoundSummary() {
+  state.summaryOpen = false;
+  els.roundSummary.classList.add("is-hidden");
+}
+
+function finishTurn(reason, type = "manual") {
+  const team = teamLabel(state.currentTeam);
+  const wasFinalRound = state.round >= state.totalRounds;
   logEvent(`${team}: ${reason}`);
   nextCard();
   nextTeam();
   render();
+  showRoundSummary({ previousTeam: team, reason, type, wasFinalRound });
 }
 
 function startTimer() {
+  if (state.summaryOpen) return;
+
   if (state.running) {
     state.running = false;
     clearInterval(state.timerId);
@@ -776,7 +1448,7 @@ function startTimer() {
   state.timerId = setInterval(() => {
     state.seconds -= 1;
     if (state.seconds <= 0) {
-      finishTurn("czas minął");
+      finishTurn("czas minął", "time");
       return;
     }
     renderTimer();
@@ -810,7 +1482,7 @@ document.querySelector("#skip").addEventListener("click", () => {
 });
 
 document.querySelector("#foul").addEventListener("click", () => {
-  finishTurn("zakazane słowo, koniec tury");
+  finishTurn("zakazane słowo, koniec tury", "foul");
 });
 
 document.querySelector("#next-card").addEventListener("click", () => {
@@ -819,7 +1491,7 @@ document.querySelector("#next-card").addEventListener("click", () => {
 });
 
 document.querySelector("#new-round").addEventListener("click", () => {
-  finishTurn("ręcznie rozpoczęto kolejną turę");
+  finishTurn("ręcznie rozpoczęto kolejną turę", "manual");
 });
 
 document.querySelector("#reset-game").addEventListener("click", () => {
@@ -830,6 +1502,7 @@ document.querySelector("#reset-game").addEventListener("click", () => {
 
 function resetGame() {
   clearInterval(state.timerId);
+  hideRoundSummary();
   state.mode = setup.mode;
   state.deckKey = setup.deck;
   state.totalRounds = setup.rounds;
@@ -840,6 +1513,7 @@ function resetGame() {
   state.seconds = setup.time;
   state.maxSeconds = setup.time;
   state.running = false;
+  state.summaryOpen = false;
   state.deck = shuffle([...decks[state.deckKey]]);
   els.eventLog.innerHTML = "";
   document.querySelectorAll(".mode-button").forEach((button) => {
@@ -848,6 +1522,14 @@ function resetGame() {
 }
 
 els.startPause.addEventListener("click", startTimer);
+
+els.summaryContinue.addEventListener("click", hideRoundSummary);
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && state.summaryOpen) {
+    hideRoundSummary();
+  }
+});
 
 document.querySelector("#add-time").addEventListener("click", () => {
   state.seconds += 15;
